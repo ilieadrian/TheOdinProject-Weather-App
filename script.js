@@ -23,12 +23,23 @@ async function getData(param) {
   handleDataProcessing(dataIsProcessing)
   try {
     const data = await fetchData(param);
-    console.log(data)
     dataIsProcessing = false;
+    processData(data)
     handleDataProcessing(dataIsProcessing)
   } catch (error) {
     console.error("Error:", error)
   } 
+}
+
+function processData(data) {
+  console.log("Procesdata fired", data)
+  const currentTempF = data.currentConditions.temp;
+  const currentTempC =  ((currentTempF - 32) * 5/9).toFixed(1);
+  const curentCondition = data.currentConditions.conditions;
+  const curentConditionDescription = data.description;
+  const icon = data.currentConditions.icon;
+
+  console.log(currentTempF, currentTempC, curentCondition, curentConditionDescription, icon)
 }
 
 function handleDataProcessing(dataIsProcessing) {
@@ -40,5 +51,5 @@ function handleDataProcessing(dataIsProcessing) {
   
 }
 
-getData("Buzau")
+getData("Bucuresti")
 
