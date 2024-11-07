@@ -1,3 +1,7 @@
+const cityInput = document.getElementById("city-name");
+const submitBTN = document.getElementById("button");
+const inputErrorMessage = document.getElementById("error-mesage")
+
 function fetchData(city) {
   return new Promise((resolve, reject) => {
       fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?key=K2LFQUZTBEFMY6X55NN7KWSTF`, { mode: 'cors' })
@@ -15,8 +19,6 @@ function fetchData(city) {
           });
   });
 }
-
-// Usage example:
 
 async function getData(param) {
   let dataIsProcessing = true;
@@ -50,6 +52,22 @@ function handleDataProcessing(dataIsProcessing) {
   }
   
 }
+
+function validateInput() {
+  const cityName = cityInput.value.trim()
+
+  if(cityName.length === 0) {
+    inputErrorMessage.style.setProperty("display", "block")
+    cityInput.style.setProperty("border", "1px solid red")
+    return;
+  } else {
+    inputErrorMessage.style.setProperty("display", "none")
+    cityInput.style.removeProperty("border", "1px solid red")
+  }
+}
+
+
+submitBTN.addEventListener('click', validateInput)
 
 // getData("Bucuresti")
 

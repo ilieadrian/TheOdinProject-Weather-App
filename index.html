@@ -11,14 +11,24 @@
     <title>The Odin Project - Weather App</title>
 </head>
 <body>
+    <div class="info">
+        <h2>Weather app!</h2>
+        <p>Type a city in the form bellow to see the current temperature.</p>
+
+    </div>
+    <!-- <p>Type a city in the form bellow to see the current temperature.</p> -->
+
     <div class="container">
         <form>
-            <input type="text" id="city-name" required>
-            <button type="button">Search</button>
+            <div class="input-container">
+                <input type="text" id="city-name" required>
+                <span class="error" id="error-mesage">Field cannot be empty</span>       
+            </div>
+            <button type="button" id="button">Search</button>
         </form>
 
 
-        <div class="weather-card">
+        <!-- <div class="weather-card">
             <h2>Weather in Bucuresti</h2>
             <div class="information-container">
                 <div class="secondary-information-container">
@@ -34,7 +44,7 @@
                 </div>
                 <p class="condition-description">Lorem ipsum dolor sit amet.</p>
             </div>
-        </div>
+        </div> -->
 
         <div id="overlay">
             <i class="fa fa-refresh fa-spin"></i>
