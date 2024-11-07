@@ -6,11 +6,43 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <title>The Odin Project - Weather App</title>
 </head>
 <body>
-    <p>See console</p>
+    <div class="container">
+        <form>
+            <input type="text" id="city-name" required>
+            <button type="button">Search</button>
+        </form>
+
+
+        <div class="weather-card">
+            <h2>Weather in Bucuresti</h2>
+            <div class="information-container">
+                <div class="secondary-information-container">
+                    <div class="temp-container">
+                        <img src="./images/partly-cloudy-day.png" alt="">
+                            <div class="temp">
+                                <span>110</span>
+                                <p class="temperature">°C |<a href="#" id ="changeScale">°F</a></p>
+                            </div>    
+                    </div>
+                    <p class="weather">Weather condition: Sunny</p>
+
+                </div>
+                <p class="condition-description">Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+
+        <div id="overlay">
+            <i class="fa fa-refresh fa-spin"></i>
+            <p class="overlay-message">Plase wait! Getting data.</p>
+        </div>
+
+    </div>
+
     <p class="attribution">Coded by<a href="http://ilieadrian.com">Ilie Adrian</a></p>
     <script src="script.js"></script>
 </body>

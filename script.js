@@ -37,9 +37,9 @@ function processData(data) {
   const currentTempC =  ((currentTempF - 32) * 5/9).toFixed(1);
   const curentCondition = data.currentConditions.conditions;
   const curentConditionDescription = data.description;
-  const icon = data.currentConditions.icon;
+  const iconCode = data.currentConditions.icon;
 
-  console.log(currentTempF, currentTempC, curentCondition, curentConditionDescription, icon)
+  console.log(currentTempF, currentTempC, curentCondition, curentConditionDescription, iconCode)
 }
 
 function handleDataProcessing(dataIsProcessing) {
@@ -51,5 +51,5 @@ function handleDataProcessing(dataIsProcessing) {
   
 }
 
-getData("Bucuresti")
+// getData("Bucuresti")
 

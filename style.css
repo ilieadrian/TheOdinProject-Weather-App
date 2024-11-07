@@ -18,27 +18,141 @@ body {
     background-color: #F9FBFC;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     margin: 0 auto;
     position: relative;
     text-align: center;
 }
 
-.button {
-    min-width: 190px;
+.container {
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+input[type=text] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+button {
+    min-width: 2rem;
     font-size: 1rem;
     font-weight: 400;
     border: none;
     background-color: rgb(62, 76, 117);
     color: rgb(255, 255, 255);
-    padding: 0.75rem 1rem;
+    padding: 0.65rem 1rem;
     border-radius: 3px;
 }
 
-.button:hover {
+button:hover {
     border: none;
     cursor: pointer;
     background-color: rgba(62, 76, 117, 0.8);
 }
+
+.weather-card {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 20rem;
+    background-color: #fff;
+    border: 2px solid transparent;
+    border-radius: 2rem;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+.information-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.secondary-information-container {
+    display: flex;
+    flex-direction: column;
+    }
+
+.temp-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.temp-container img {
+    margin-right: 1rem;
+}
+
+span {
+    vertical-align: top;
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: top;
+}
+
+.temp {
+    display: flex;
+    flex: row ;
+    align-items: flex-start;
+}
+
+.temperature {
+    align-self: flex-start;
+    margin-top:1rem;
+    margin-left: 0.3rem;    
+    font-size: 1rem;
+}
+.temperature a {
+    text-decoration: none;
+    color: black;
+}
+
+.weather {
+    margin-bottom: 0.5rem;
+}
+
+
+#overlay {
+    display: none;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(60, 60, 60, 0.1);
+    }
+
+p.overlay-message {
+    color: rgb(60, 60, 60);
+}
+
+
+i.fa {
+    color: rgba(60, 60, 60, 0.8);
+    font-size:6rem;
+    margin-bottom: 2rem;
+}
+
+
+
 
 /* Footer */
 .attribution {
@@ -51,6 +165,8 @@ body {
     left: 0;
     z-index: 999;
 }
+
+
 
 .attribution a {
     margin-left: 0.3rem;
