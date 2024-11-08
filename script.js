@@ -51,13 +51,7 @@ function processData(data) {
   displayData(cityName,currentTempF, currentTempC, curentCondition, curentConditionDescription, iconCode)
 }
 
-function handleDataProcessing(dataIsProcessing) {
-  if(dataIsProcessing) {
-    overlay.style.display = "flex";
-  } else {
-    overlay.style.display = "none";
-  }
-}
+
 
 function displayData(cityName, currentTempF, currentTempC, curentCondition, curentConditionDescription, iconCode) {
   if(!weatherCard) {
@@ -74,8 +68,7 @@ function displayData(cityName, currentTempF, currentTempC, curentCondition, cure
                     <div class="temp-container">
                         <img src="./images/${iconCode}.png" alt="">
                             <div class="temp">
-                                <span>${currentTempC}</span>
-                                <p class="temperature">°C |<a href="#" id ="changeScale">°F</a></p>
+                              ${handleTemperature(currentTempF, currentTempC)}
                             </div>    
                     </div>
                     <p class="weather">Weather condition: ${curentCondition}</p>
@@ -90,15 +83,24 @@ function displayData(cityName, currentTempF, currentTempC, curentCondition, cure
   container.appendChild(weatherCard);
 }
 
-function validateInput() {
-  const cityName = cityInput.value.trim()
+function handleTemperature(currentTempF, currentTempC) {
+  console.log(currentTempF, currentTempC)
 
-  if(cityName.length === 0) {
-    handleError("Field cannot be empty")
-    return;
+  let tempContent = "";
+
+  tempContent += `
+    <span>${currentTempC}</span>
+    <p class="temperature">°C |<a href="#" id ="changeScale">°F</a></p>
+  `;
+
+  return tempContent; 
+}
+
+function handleDataProcessing(dataIsProcessing) {
+  if(dataIsProcessing) {
+    overlay.style.display = "flex";
   } else {
-    handleError(null);
-    getData(cityName);
+    overlay.style.display = "none";
   }
 }
 
@@ -114,8 +116,19 @@ function handleError(errorMessage){
   }
 }
 
+function validateInput() {
+  const cityName = cityInput.value.trim()
+
+  if(cityName.length === 0) {
+    handleError("Field cannot be empty")
+    return;
+  } else {
+    handleError(null);
+    getData(cityName);
+  }
+}
+
 
 submitBTN.addEventListener('click', validateInput)
 
-// getData("Bucuresti")
 
