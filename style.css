@@ -73,8 +73,6 @@ input[type=text] {
     align-content: s;
 }
 
-
-
 button {
     min-width: 2rem;
     font-size: 1rem;
@@ -99,6 +97,7 @@ button:hover {
     align-items: center;
     justify-content: space-between;
     height: 20rem;
+    max-width: 25rem;
     background-color: #fff;
     border: 2px solid transparent;
     border-radius: 2rem;

@@ -1,6 +1,8 @@
 const cityInput = document.getElementById("city-name");
 const submitBTN = document.getElementById("button");
+const container = document.querySelector(".container")
 const inputErrorMessage = document.getElementById("error-mesage")
+let weatherCard = "";
 
 function fetchData(city) {
   return new Promise((resolve, reject) => {
@@ -26,7 +28,7 @@ async function getData(param) {
   try {
     const data = await fetchData(param);
     dataIsProcessing = false;
-    processData(data)
+    processData(data, param)
     handleDataProcessing(dataIsProcessing)
   } catch (error) {
     console.error("Error:", error)
@@ -34,14 +36,15 @@ async function getData(param) {
 }
 
 function processData(data) {
-  console.log("Procesdata fired", data)
+  const cityName = data.resolvedAddress ;
   const currentTempF = data.currentConditions.temp;
   const currentTempC =  ((currentTempF - 32) * 5/9).toFixed(1);
   const curentCondition = data.currentConditions.conditions;
   const curentConditionDescription = data.description;
   const iconCode = data.currentConditions.icon;
+  
 
-  console.log(currentTempF, currentTempC, curentCondition, curentConditionDescription, iconCode)
+  displayData(cityName,currentTempF, currentTempC, curentCondition, curentConditionDescription, iconCode)
 }
 
 function handleDataProcessing(dataIsProcessing) {
@@ -50,7 +53,37 @@ function handleDataProcessing(dataIsProcessing) {
   } else {
     console.log("finished data proceesing")
   }
-  
+}
+
+function displayData(cityName, currentTempF, currentTempC, curentCondition, curentConditionDescription, iconCode) {
+  if(!weatherCard) {
+    weatherCard = document.createElement('div');
+    weatherCard.classList.add("weather-card");
+  }
+
+  let content = "";
+
+  content +=`
+            <h2>Weather in ${cityName}</h2>
+            <div class="information-container">
+                <div class="secondary-information-container">
+                    <div class="temp-container">
+                        <img src="./images/${iconCode}.png" alt="">
+                            <div class="temp">
+                                <span>${currentTempC}</span>
+                                <p class="temperature">°C |<a href="#" id ="changeScale">°F</a></p>
+                            </div>    
+                    </div>
+                    <p class="weather">Weather condition: ${curentCondition}</p>
+
+                </div>
+                <p class="condition-description">${curentConditionDescription}</p>
+            </div>
+  `;
+
+
+  weatherCard.innerHTML = content;
+  container.appendChild(weatherCard);
 }
 
 function validateInput() {
@@ -63,6 +96,7 @@ function validateInput() {
   } else {
     inputErrorMessage.style.setProperty("display", "none")
     cityInput.style.removeProperty("border", "1px solid red")
+    getData(cityName);
   }
 }
 
