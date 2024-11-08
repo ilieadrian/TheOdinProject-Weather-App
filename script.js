@@ -2,6 +2,7 @@ const cityInput = document.getElementById("city-name");
 const submitBTN = document.getElementById("button");
 const container = document.querySelector(".container")
 const inputErrorMessage = document.getElementById("error-mesage")
+const overlay = document.getElementById("overlay")
 let weatherCard = "";
 
 function fetchData(city) {
@@ -9,6 +10,7 @@ function fetchData(city) {
       fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?key=K2LFQUZTBEFMY6X55NN7KWSTF`, { mode: 'cors' })
           .then((response) => {
               if (!response.ok) {
+                  
                   throw new Error(`HTTP error! Status: ${response.status}`);
               }
               return response.json();
@@ -17,6 +19,7 @@ function fetchData(city) {
               resolve(data);  // Resolve the promise with the data
           })
           .catch((error) => {
+            handleError("City not found.")
               reject(`Error: Data fetch failed - ${error.message}`);  // Reject the promise with an error message
           });
   });
@@ -31,7 +34,8 @@ async function getData(param) {
     processData(data, param)
     handleDataProcessing(dataIsProcessing)
   } catch (error) {
-    console.error("Error:", error)
+    console.error("Error:", error);
+    overlay.style.display = "none";
   } 
 }
 
@@ -49,9 +53,9 @@ function processData(data) {
 
 function handleDataProcessing(dataIsProcessing) {
   if(dataIsProcessing) {
-    console.log("data Is Processing")
+    overlay.style.display = "flex";
   } else {
-    console.log("finished data proceesing")
+    overlay.style.display = "none";
   }
 }
 
@@ -90,13 +94,23 @@ function validateInput() {
   const cityName = cityInput.value.trim()
 
   if(cityName.length === 0) {
+    handleError("Field cannot be empty")
+    return;
+  } else {
+    handleError(null);
+    getData(cityName);
+  }
+}
+
+function handleError(errorMessage){
+  if(errorMessage) {
     inputErrorMessage.style.setProperty("display", "block")
     cityInput.style.setProperty("border", "1px solid red")
-    return;
+    inputErrorMessage.textContent = errorMessage;
   } else {
     inputErrorMessage.style.setProperty("display", "none")
     cityInput.style.removeProperty("border", "1px solid red")
-    getData(cityName);
+    inputErrorMessage.textContent = "";
   }
 }
 
