@@ -3,6 +3,7 @@ const submitBTN = document.getElementById("button");
 const container = document.querySelector(".container")
 const inputErrorMessage = document.getElementById("error-mesage")
 const overlay = document.getElementById("overlay")
+const displayFahrenheit = false;
 let weatherCard = "";
 
 function fetchData(city) {
@@ -78,7 +79,6 @@ function displayData(cityName, currentTempF, currentTempC, curentCondition, cure
             </div>
   `;
 
-
   weatherCard.innerHTML = content;
   container.appendChild(weatherCard);
 }
@@ -88,10 +88,29 @@ function handleTemperature(currentTempF, currentTempC) {
 
   let tempContent = "";
 
-  tempContent += `
+  const displayCelsius = new Promise((resolve, reject)=> {
+    tempContent += `
     <span>${currentTempC}</span>
-    <p class="temperature">°C |<a href="#" id ="changeScale">°F</a></p>
+    <p class="temperature"><span class="active-temp">°C </span> <a href="#" id="changeScaleF">| °F</a></p>
   `;
+  })
+
+
+  if(!displayFahrenheit) {
+    tempContent += `
+    <span>${currentTempC}</span>
+    <p class="temperature"><span class="active-temp">°C </span> <a href="#" id="changeScaleF">| °F</a></p>
+  `;
+  } else {
+    tempContent += `
+    <span>${currentTempF}</span>
+    <p class="temperature">°C |<a href="#" id="changeScale">°F</a></p>
+    `;
+  }
+  //with promise, then chain the then for retur and then for event listsners
+  changeScaleF.addEventListener("click", () => {
+    return displayFahrenheit = true;
+  })
 
   return tempContent; 
 }
@@ -130,5 +149,5 @@ function validateInput() {
 
 
 submitBTN.addEventListener('click', validateInput)
-
+//add event listener on enter key
 
