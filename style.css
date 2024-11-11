@@ -18,7 +18,7 @@ body {
     background-color: #F9FBFC;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 0 auto;
     padding: 1rem;
     position: relative;
@@ -160,7 +160,6 @@ span.active-temp {
     margin-bottom: 0.5rem;
 }
 
-
 #overlay {
     display: none;
     /* display: flex; */
@@ -181,7 +180,6 @@ p.overlay-message {
     color: white;
 }
 
-
 i.fa {
     color: white;
     font-size:6rem;
@@ -200,8 +198,7 @@ i.fa {
     z-index: 999;
 }
 
-
-
 .attribution a {
     margin-left: 0.3rem;
+    text-decoration: none;
 }
